@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Office Real-Time Demo</title>
+</head>
+<body>
+  <h2>Live Booking Feed (booking-service)</h2>
+  <ul id="log"></ul>
+
+  <script>
+    const ws = new WebSocket("ws://" + location.host + "/ws/office");
+    const log = document.getElementById("log");
+
+    ws.onmessage = (event) => {
+      const li = document.createElement("li");
+      li.textContent = event.data;
+      log.appendChild(li);
+    };
+
+    ws.onopen = () => console.log("Connected to /ws/office");
+  </script>
+</body>
+</html>
