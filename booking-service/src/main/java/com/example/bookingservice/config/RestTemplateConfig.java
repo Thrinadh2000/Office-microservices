@@ -13,6 +13,8 @@ public class RestTemplateConfig {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         // HttpComponentsClientHttpRequestFactory supports PATCH; the JDK's
         // default request factory does not.
-        return builder.requestFactory(HttpComponentsClientHttpRequestFactory::new).build();
+        return builder
+                .requestFactory(() -> new HttpComponentsClientHttpRequestFactory())
+                .build();
     }
 }
